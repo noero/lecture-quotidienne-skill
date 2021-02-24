@@ -4,7 +4,7 @@
 # They should have this template name : nwt_01_Ge_F_01.mp3
 
 from os.path import dirname, join
-from mycroft import MycroftSkill, intent_file_handler
+from mycroft import MycroftSkill, intent_handler
 from mycroft.skills.audioservice import AudioService
 from mycroft.audio import wait_while_speaking
 from datetime import datetime, timedelta, date
@@ -29,7 +29,7 @@ class LectureQuotidienne(MycroftSkill):
         self.chapt = self.settings.get('last_chapter_count', 0)
 
 # Définir x et y
-    @intent_file_handler('reading.intent')
+    @intent_handler('reading.intent')
     def handle_quotidienne_lecture(self, message):
         if self.last_date == date.today().strftime("%Y%m%d") and self.book == len(self.programme[self.prog]) and self.chapt == len(self.programme[self.prog][self.book]["chapters"]):
             self.speak_dialog('already.done')
